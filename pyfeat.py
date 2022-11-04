@@ -19,9 +19,8 @@ imgPath = "face.png"
 
 while True:
     path = os.path.isfile(imgPath)
-    print(path)
     try:
-        single_face_img_path = imgPath
+        single_face_img_path = imgPath  
         imshow(single_face_img_path)
         single_face_prediction = detector.detect_image(single_face_img_path)
         list = json.loads(single_face_prediction.to_json())
@@ -33,12 +32,17 @@ while True:
         surprise = list["surprise"]["0"]
         neutral = list["neutral"]["0"]
         happiness = list["happiness"]["0"]
+        
 
-        emotionDict = {"anger": anger, "disgust": disgust, "fear": fear,
-                       "surprise": surprise, "neutral": neutral, "happiness": happiness}
+        emotionDict = {"怒り": anger, "不快": disgust, "恐怖": fear,
+                       "驚き": surprise, "普通": neutral, "幸せ": happiness, "悲しみ": sadness }
+        
 
         print([kv for kv in emotionDict.items()
               if kv[1] == max(emotionDict.values())][0])
+        
+        
+        
 
     except Exception as e:
         pass
